@@ -60,33 +60,43 @@ To make sure you have the latest repos:
     wstool update
     rosdep install --from-paths . --ignore-src --rosdistro melodic
 
-## Setup
-
-To use the Descartes path service capability in place of the move
-
 ## Run
 
-Run descartes_path_service_capability_demo
-```
-roslaunch descartes_capability descartes_path_service_capability_demo.launch
+To use the Descartes path service capability in place of the move_group Cartesian path planning service, you must set the `~/move_group/disable_capabilities` param to `move_group/MoveGroupCartesianPathService` and `~/move_group/disable_capabilities` to `descartes_capability/MoveGroupDescartesPathService`. This is done for you in `./config/setup.yaml`. You can either set these parameters explicitly in your robot's `move_group.launch` file or you can simply load `./config/setup.yaml` to the param server.
+
+```yaml
+move_group:
+  disable_capabilities: move_group/MoveGroupCartesianPathService
+  capabilities: descartes_capability/MoveGroupDescartesPathService
 ```
 
-### Run with Debuging
+With your ROS parameters set, you can now run your favorite `<robot>_moveit_config demo.launch`.
 
-Run descartes_path_service_capability_demo with GDB
+eg:
+
+    roslaunch panda_moveit_config demo.launch
+
+If you set up your environment correctly, you should see these lines output to your console:
+
 ```
-roslaunch descartes_capability descartes_path_service_capability_demo.launch debug:=true
+********************************************************
+* MoveGroup using:
+*     - DescartesPathService
+*     - ApplyPlanningSceneService
+*     - ClearOctomapService
+*     - ExecuteTrajectoryAction
+*     - GetPlanningSceneService
+*     - KinematicsService
+*     - MoveAction
+*     - PickPlaceAction
+*     - MotionPlanService
+*     - QueryPlannersService
+*     - StateValidationService
+********************************************************
 ```
 
-Run descartes_path_service_capability_demo with Callgrind
-```
-roslaunch descartes_capability descartes_path_service_capability_demo.launch callgrind:=true
-```
+You can now use your shiny new `DescartesPathService` just like you used to use the `CartesianPathService`.
 
-Run descartes_path_service_capability_demo with Valgrind
-```
-roslaunch descartes_capability descartes_path_service_capability_demo.launch callgrind:=true
-```
 
 ## Run Docker
 
@@ -110,12 +120,6 @@ You must have a private rsa key `~/.ssh/id_rsa` that is not password protected a
     * With the gui (tested with Ubuntu native and a Ubuntu VM)
 
             . ./gui-docker -it --rm descartes_capability:melodic-source /bin/bash
-
-## Code API
-
-> Note: this package has not been released yet
-
-See [the Doxygen documentation](http://docs.ros.org/melodic/api/descartes_capability/html/anotated.html)
 
 ## Testing and Linting
 
