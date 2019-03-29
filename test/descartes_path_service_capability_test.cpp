@@ -53,6 +53,15 @@
 // Testing
 #include <gtest/gtest.h>
 
+// For listing capabilities
+#include <moveit/move_group/move_group_capability.h>
+#include <pluginlib/class_loader.hpp>
+
+// For loading panda robot description
+#include <moveit/robot_model/robot_model.h>
+#include <moveit/planning_scene_monitor/planning_scene_monitor.h>
+#include <moveit/utils/robot_model_test_utils.h>
+
 namespace descartes_capability
 {
 class MoveGroupDescartesPathServiceTest : public ::testing::Test
@@ -66,11 +75,69 @@ protected:
   ros::NodeHandle nh_;
 };  // class MoveGroupDescartesPathServiceTest
 
-TEST_F(MoveGroupDescartesPathServiceTest, NameOfTest)
+TEST_F(MoveGroupDescartesPathServiceTest, TestDescartesCapabilityAvailable)
 {
-  // TODO(mlautman): Add tests
-  bool test = true;
-  EXPECT_TRUE(test);
+  try
+  {
+    pluginlib::ClassLoader<move_group::MoveGroupCapability> capability_plugin_loader("moveit_ros_move_group",
+                                                                                     "move_group::MoveGroupCapability");
+    // Test a move_group default plugin
+    EXPECT_TRUE(capability_plugin_loader.isClassAvailable("move_group/MoveGroupCartesianPathService"));
+    // Test the Descartes capability
+    EXPECT_TRUE(capability_plugin_loader.isClassAvailable("descartes_capability/MoveGroupDescartesPathService"));
+  }
+  catch (pluginlib::PluginlibException& ex)
+  {
+    std::cerr << "Exception while creating plugin loader for move_group capabilities: " << ex.what() << std::endl;
+    EXPECT_TRUE(false);
+  }
+}
+
+TEST_F(MoveGroupDescartesPathServiceTest, TestDescartesCapabilityCreation)
+{
+  try
+  {
+    pluginlib::ClassLoader<move_group::MoveGroupCapability> capability_plugin_loader("moveit_ros_move_group",
+                                                                                     "move_group::MoveGroupCapability");
+
+    move_group::MoveGroupCapabilityPtr cap =
+        capability_plugin_loader.createUniqueInstance("descartes_capability/MoveGroupDescartesPathService");
+
+    EXPECT_EQ("DescartesPathService", cap->getName());
+  }
+  catch (pluginlib::PluginlibException& ex)
+  {
+    std::cerr << "Exception while creating plugin loader for move_group capabilities: " << ex.what() << std::endl;
+    EXPECT_TRUE(false);
+  }
+}
+
+TEST_F(MoveGroupDescartesPathServiceTest, TestDescartesCapabilityInitialize)
+{
+  try
+  {
+    pluginlib::ClassLoader<move_group::MoveGroupCapability> capability_plugin_loader("moveit_ros_move_group",
+                                                                                     "move_group::MoveGroupCapability");
+
+    bool allow_trajectory_execution = false;
+    bool debug = false;
+    planning_scene_monitor::PlanningSceneMonitorPtr psm(
+        new planning_scene_monitor::PlanningSceneMonitor("robot_description"));
+    move_group::MoveGroupContextPtr context(new move_group::MoveGroupContext(psm, allow_trajectory_execution, debug));
+
+    move_group::MoveGroupCapabilityPtr cap =
+        capability_plugin_loader.createUniqueInstance("descartes_capability/MoveGroupDescartesPathService");
+
+    EXPECT_TRUE(capability_plugin_loader.isClassLoaded("descartes_capability/MoveGroupDescartesPathService"));
+    cap->setContext(context);
+    cap->initialize();
+    EXPECT_EQ("DescartesPathService", cap->getName());
+  }
+  catch (pluginlib::PluginlibException& ex)
+  {
+    std::cerr << "Exception while creating plugin loader for move_group capabilities: " << ex.what() << std::endl;
+    EXPECT_TRUE(false);
+  }
 }
 
 }  // namespace descartes_capability

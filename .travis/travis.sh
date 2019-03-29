@@ -123,6 +123,7 @@ echo "Inside Docker container"
 
 # Update the sources
 travis_run apt-get -qq update
+travis_run apt-get -qq upgrade
 
 # Make sure the packages are up-to-date
 #travis_run apt-get -qq dist-upgrade
@@ -177,7 +178,7 @@ travis_run_wait 60 catkin build --no-status --summarize || exit 1
 travis_run ccache -s
 
 # Source the new built workspace
-travis_run source devel/setup.bash;
+travis_run source devel/setup.bash
 
 # Choose which packages to run tests on
 # echo "Test blacklist: $TEST_BLACKLIST"
@@ -205,9 +206,11 @@ travis_run source devel/setup.bash;
 # Run catkin package tests
 travis_run catkin run_tests --no-deps descartes_capability
 
+travis_run rosrun moveit_ros_move_group list_move_group_capabilities
+travis_run cat build/descartes_capability/test_results/descartes_capability/rosunit-descartes_path_service_capability_test.xml
+
 # Show test results summary and throw error if necessary
 travis_run catkin_test_results build/descartes_capability
-#travis_run catkin_test_results
 
 echo "Travis script has finished successfully"
 HIT_ENDOFSCRIPT=true
