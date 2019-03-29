@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>PACKAGE_NAME</name>
+  <name>descartes_capability</name>
   <version>0.0.1</version>
-  <description>PACKAGE_DESCRIPTION</description>
+  <description>A move_group capability that uses Descartes for Cartesian Planning</description>
 
-  <maintainer email="EMAIL_ADDRESS">FIRST_NAME LAST_NAME</maintainer>
-  <author email="EMAIL_ADDRESS">FIRST_NAME LAST_NAME</author>
+  <maintainer email="mike@picknik.ai">Mike Lautman</maintainer>
+  <author email="mike@picknik.ai">Mike Lautman</author>
 
   <license>BSD</license>
 
-  <url type="website">https://github.com/PickNikRobotics/PACKAGE_NAME</url>
-  <url type="bugtracker">https://github.com/PickNikRobotics/PACKAGE_NAME/issues</url>
-  <url type="repository">https://github.com/PickNikRobotics/PACKAGE_NAME/</url>
+  <url type="website">https://github.com/PickNikRobotics/descartes_capability</url>
+  <url type="bugtracker">https://github.com/PickNikRobotics/descartes_capability/issues</url>
+  <url type="repository">https://github.com/PickNikRobotics/descartes_capability/</url>
 
   <buildtool_depend>catkin</buildtool_depend>
 

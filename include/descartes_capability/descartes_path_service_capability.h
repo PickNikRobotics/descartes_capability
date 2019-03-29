@@ -32,24 +32,42 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: FIRST_NAME LAST_NAME
-   Desc: TODO(GITHUB_NAME):
+/* Author: Mike Lautman
+   Desc: TODO(mlautman):
 */
 
-#include <PACKAGE_NAME/CPP_CLASS_FILE_NAME.h>
+#ifndef descartes_capability__descartes_path_service_capability__H
+#define descartes_capability__descartes_path_service_capability__H
 
-namespace PACKAGE_NAME
+#include <string>
+
+// ROS
+#include <ros/ros.h>
+
+// ROS parameter loading
+#include <rosparam_shortcuts/rosparam_shortcuts.h>
+
+namespace descartes_capability
 {
-CPP_CLASS_NAME::CPP_CLASS_NAME() : nh_("~")
+class MoveGroupDescartesPathService
 {
-  // Load rosparams
-  // ros::NodeHandle rpnh(nh_, name_);
-  // std::size_t error = 0;
-  // error += !rosparam_shortcuts::get(name_, rpnh, "control_rate", control_rate_);
+public:
+  /** \brief Constructor */
+  MoveGroupDescartesPathService();
 
-  // Add more parameters here to load if desired
-  // rosparam_shortcuts::shutdownIfError(name_, error);
+private:
+  // --------------------------------------------------------
 
-  ROS_INFO_STREAM_NAMED(name_, "Hello world.");
-}
-}  // end namespace PACKAGE_NAME
+  // The short name of this class
+  std::string name_ = "descartes_path_service_capability";
+
+  // A shared node handle
+  ros::NodeHandle nh_;
+};  // end class MoveGroupDescartesPathService
+
+// Create std pointers for this class
+typedef std::shared_ptr<MoveGroupDescartesPathService> MoveGroupDescartesPathServicePtr;
+typedef std::shared_ptr<const MoveGroupDescartesPathService> MoveGroupDescartesPathServiceConstPtr;
+
+}  // namespace descartes_capability
+#endif  // descartes_capability__descartes_path_service_capability__H

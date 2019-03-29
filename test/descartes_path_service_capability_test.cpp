@@ -32,8 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: FIRST_NAME LAST_NAME
-   Desc: TODO(GITHUB_NAME):
+/* Author: Mike Lautman
+   Desc: TODO(mlautman):
 */
 
 /** EXAMPLES:
@@ -53,33 +53,33 @@
 // Testing
 #include <gtest/gtest.h>
 
-namespace PACKAGE_NAME
+namespace descartes_capability
 {
 
-class CPP_CLASS_NAMETest : public ::testing::Test
+class MoveGroupDescartesPathServiceTest : public ::testing::Test
 {
 public:
-  CPP_CLASS_NAMETest() : nh_("~")
+  MoveGroupDescartesPathServiceTest() : nh_("~")
   {}
 
 protected:
   ros::NodeHandle nh_;
-};  // class CPP_CLASS_NAMETest
+};  // class MoveGroupDescartesPathServiceTest
 
-TEST_F(CPP_CLASS_NAMETest, ConstructDestruct) { ASSERT_TRUE(base.initialize()); }
+TEST_F(MoveGroupDescartesPathServiceTest, ConstructDestruct) { ASSERT_TRUE(base.initialize()); }
 
-TEST_F(CPP_CLASS_NAMETest, NameOfTest)
+TEST_F(MoveGroupDescartesPathServiceTest, NameOfTest)
 {
   bool test = true;
   EXPECT_TRUE(test);
 }
 
-} // namespace PACKAGE_NAME
+} // namespace descartes_capability
 
 int main(int argc, char** argv)
 {
   testing::InitGoogleTest(&argc, argv);
-  ros::init(argc, argv, "CPP_SHORT_NAME");
+  ros::init(argc, argv, "descartes_path_service_capability");
 
   ros::AsyncSpinner spinner(1);
   spinner.start();

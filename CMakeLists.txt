@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(PACKAGE_NAME)
+project(descartes_capability)
 
 # C++ 11
 add_compile_options(-std=c++11)
@@ -62,7 +62,7 @@ include_directories(
 # Declare a C++ library with project namespace to avoid naming collision
 add_library(
   ${PROJECT_NAME}
-  src/CPP_CLASS_FILE_NAME.cpp
+  src/descartes_path_service_capability.cpp
 )
 
 # Specify libraries to link a library or executable target against
@@ -74,20 +74,20 @@ target_link_libraries(
 
 # Declare a C++ executable
 add_executable(
-  ${PROJECT_NAME}_CPP_EXECUTABLE_NAME
-  src/CPP_EXECUTABLE_NAME.cpp
+  ${PROJECT_NAME}_descartes_path_service_capability_demo
+  src/descartes_path_service_capability_demo.cpp
 )
 
 # Rename C++ executable without namespace
 set_target_properties(
-  ${PROJECT_NAME}_CPP_EXECUTABLE_NAME
+  ${PROJECT_NAME}_descartes_path_service_capability_demo
   PROPERTIES
-    OUTPUT_NAME CPP_EXECUTABLE_NAME PREFIX ""
+    OUTPUT_NAME descartes_path_service_capability_demo PREFIX ""
 )
 
 # Specify libraries to link a library or executable target against
 target_link_libraries(
-  ${PROJECT_NAME}_CPP_EXECUTABLE_NAME
+  ${PROJECT_NAME}_descartes_path_service_capability_demo
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
@@ -100,7 +100,7 @@ target_link_libraries(
 # Mark executables and/or libraries for installation
 install(
   TARGETS
-    ${PROJECT_NAME} ${PROJECT_NAME}_CPP_EXECUTABLE_NAME
+    ${PROJECT_NAME} ${PROJECT_NAME}_descartes_path_service_capability_demo
   ARCHIVE DESTINATION
     ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION
@@ -117,7 +117,7 @@ install(
     ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS scripts/PYTHON_EXECUTABLE_NAME.py
+catkin_install_python(PROGRAMS scripts/descartes_path_service_capability_python_demo.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 # Mark roslaunch files for installation
@@ -143,8 +143,8 @@ install(
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
 
-  add_rostest_gtest(CPP_CLASS_FILE_NAME_test test/CPP_CLASS_FILE_NAME_test.test test/CPP_CLASS_FILE_NAME_test.cpp)
-  target_link_libraries(CPP_CLASS_FILE_NAME_test
+  add_rostest_gtest(descartes_path_service_capability_test test/descartes_path_service_capability_test.test test/descartes_path_service_capability_test.cpp)
+  target_link_libraries(descartes_path_service_capability_test
     ${PROJECT_NAME}
     ${catkin_LIBRARIES}
     ${Boost_LIBRARIES}

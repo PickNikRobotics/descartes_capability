@@ -32,29 +32,24 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: FIRST_NAME LAST_NAME
-   Desc: TODO(GITHUB_NAME):
+/* Author: Mike Lautman
+   Desc: TODO(mlautman):
 */
 
-// ROS
-#include <ros/ros.h>
-#include <PACKAGE_NAME/CPP_CLASS_FILE_NAME.h>
+#include <descartes_capability/descartes_path_service_capability.h>
 
-int main(int argc, char** argv)
+namespace descartes_capability
 {
-  // Initialize ROS
-  ros::init(argc, argv, "CPP_SHORT_NAME");
-  ROS_INFO_STREAM_NAMED("main", "Starting CPP_CLASS_NAME...");
+MoveGroupDescartesPathService::MoveGroupDescartesPathService() : nh_("~")
+{
+  // Load rosparams
+  // ros::NodeHandle rpnh(nh_, name_);
+  // std::size_t error = 0;
+  // error += !rosparam_shortcuts::get(name_, rpnh, "control_rate", control_rate_);
 
-  ros::AsyncSpinner spinner(2);
-  spinner.start();
+  // Add more parameters here to load if desired
+  // rosparam_shortcuts::shutdownIfError(name_, error);
 
-  // Initialize main class
-  PACKAGE_NAME::CPP_CLASS_NAME server;
-
-  // Shutdown
-  ROS_INFO_STREAM_NAMED("main", "Shutting down.");
-  ros::shutdown();
-
-  return 0;
+  ROS_INFO_STREAM_NAMED(name_, "Hello world.");
 }
+}  // end namespace descartes_capability

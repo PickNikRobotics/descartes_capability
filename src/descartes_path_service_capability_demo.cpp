@@ -32,42 +32,29 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: FIRST_NAME LAST_NAME
-   Desc: TODO(GITHUB_NAME):
+/* Author: Mike Lautman
+   Desc: TODO(mlautman):
 */
-
-#ifndef PACKAGE_NAME__CPP_CLASS_FILE_NAME__H
-#define PACKAGE_NAME__CPP_CLASS_FILE_NAME__H
-
-#include <string>
 
 // ROS
 #include <ros/ros.h>
+#include <descartes_capability/descartes_path_service_capability.h>
 
-// ROS parameter loading
-#include <rosparam_shortcuts/rosparam_shortcuts.h>
-
-namespace PACKAGE_NAME
+int main(int argc, char** argv)
 {
-class CPP_CLASS_NAME
-{
-public:
-  /** \brief Constructor */
-  CPP_CLASS_NAME();
+  // Initialize ROS
+  ros::init(argc, argv, "descartes_path_service_capability");
+  ROS_INFO_STREAM_NAMED("main", "Starting MoveGroupDescartesPathService...");
 
-private:
-  // --------------------------------------------------------
+  ros::AsyncSpinner spinner(2);
+  spinner.start();
 
-  // The short name of this class
-  std::string name_ = "CPP_SHORT_NAME";
+  // Initialize main class
+  descartes_capability::MoveGroupDescartesPathService server;
 
-  // A shared node handle
-  ros::NodeHandle nh_;
-};  // end class CPP_CLASS_NAME
+  // Shutdown
+  ROS_INFO_STREAM_NAMED("main", "Shutting down.");
+  ros::shutdown();
 
-// Create std pointers for this class
-typedef std::shared_ptr<CPP_CLASS_NAME> CPP_CLASS_NAMEPtr;
-typedef std::shared_ptr<const CPP_CLASS_NAME> CPP_CLASS_NAMEConstPtr;
-
-}  // namespace PACKAGE_NAME
-#endif  // PACKAGE_NAME__CPP_CLASS_FILE_NAME__H
+  return 0;
+}

@@ -1,4 +1,4 @@
-# PACKAGE_NAME:kinetic-source
+# descartes_capability:kinetic-source
 # Downloads the source code, installs the remaining debian dependencies, and
 # builds the package
 
@@ -25,10 +25,10 @@ RUN chmod 700 /root/.ssh/id_rsa
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
 
-# Download PACKAGE_NAME source
-RUN git clone git@github.com:PickNikRobotics/PACKAGE_NAME.git && \
+# Download descartes_capability source
+RUN git clone git@github.com:PickNikRobotics/descartes_capability.git && \
     wstool init . && \
-    wstool merge ./PACKAGE_NAME/PACKAGE_NAME.rosinstall && \
+    wstool merge ./descartes_capability/descartes_capability.rosinstall && \
     wstool update && \
     rm /root/.ssh/id_rsa
 

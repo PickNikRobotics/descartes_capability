@@ -5,7 +5,7 @@
   <arg name="debug" default="false" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
   <arg     if="$(arg debug)" name="launch_prefix"
-           value="gdb -x $(find PACKAGE_NAME)/launch/gdb_settings.gdb --ex run --args" />
+           value="gdb -x $(find descartes_capability)/launch/gdb_settings.gdb --ex run --args" />
 
   <!-- Callgrind Arguments -->
   <arg name="callgrind" default="false" />
@@ -18,10 +18,10 @@
   <arg     if="$(arg valgrind)" name="launch_prefix3" value="valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all" />
 
   <!-- Launch main node -->
-  <node name="$(anon PACKAGE_NAME)" launch-prefix="$(arg launch_prefix) $(arg launch_prefix2) $(arg launch_prefix3)" pkg="PACKAGE_NAME" type="CPP_EXECUTABLE_NAME" respawn="false" output="screen">
+  <node name="$(anon descartes_capability)" launch-prefix="$(arg launch_prefix) $(arg launch_prefix2) $(arg launch_prefix3)" pkg="descartes_capability" type="descartes_path_service_capability_demo" respawn="false" output="screen">
 
     <!-- Robot-specific settings -->
-    <rosparam file="$(find PACKAGE_NAME)/config/setup.yaml" command="load"/>
+    <rosparam file="$(find descartes_capability)/config/setup.yaml" command="load"/>
   </node>
 
 </launch>

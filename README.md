@@ -1,13 +1,13 @@
-# PACKAGE_NAME
+# descartes_capability
 
-Description: PACKAGE_DESCRIPTION
+Description: A move_group capability that uses Descartes for Cartesian Planning
 
 <img src="https://picknik.ai/images/logo.jpg" width="100">
 
-Developed by FIRST_NAME LAST_NAME at [PickNik Consulting](http://picknik.ai/)
+Developed by Mike Lautman at [PickNik Consulting](http://picknik.ai/)
 
-TODO(GITHUB_NAME): fix Travis badge:
-[![Build Status](https://travis-ci.com/PickNikRobotics/PACKAGE_NAME.svg?token=o9hPQnr2kShM9ckDs6J8&branch=master)](https://travis-ci.com/PickNikRobotics/PACKAGE_NAME)
+TODO(mlautman): fix Travis badge:
+[![Build Status](https://travis-ci.com/PickNikRobotics/descartes_capability.svg?token=o9hPQnr2kShM9ckDs6J8&branch=master)](https://travis-ci.com/PickNikRobotics/descartes_capability)
 
 ## Install
 
@@ -15,7 +15,7 @@ TODO(GITHUB_NAME): fix Travis badge:
 
 > Note: this package has not been released yet
 
-    sudo apt-get install ros-kinetic-PACKAGE_NAME
+    sudo apt-get install ros-kinetic-descartes_capability
 
 ### Build from Source
 
@@ -33,9 +33,9 @@ These instructions assume you are running on Ubuntu 16.04:
 
 1. Download the required repositories and install any dependencies:
 
-        git clone git@github.com:PickNikRobotics/PACKAGE_NAME.git
+        git clone git@github.com:PickNikRobotics/descartes_capability.git
         wstool init src
-        wstool merge -t src PACKAGE_NAME/PACKAGE_NAME.rosinstall
+        wstool merge -t src descartes_capability/descartes_capability.rosinstall
         wstool update -t src
         rosdep install --from-paths src --ignore-src --rosdistro kinetic
 
@@ -52,36 +52,36 @@ These instructions assume you are running on Ubuntu 16.04:
 
 To make sure you have the latest repos:
 
-    cd $CATKIN_WS/src/PACKAGE_NAME
+    cd $CATKIN_WS/src/descartes_capability
     git checkout master
     git pull origin master
     cd ..
-    wstool merge PACKAGE_NAME/PACKAGE_NAME.rosinstall
+    wstool merge descartes_capability/descartes_capability.rosinstall
     wstool update
     rosdep install --from-paths . --ignore-src --rosdistro kinetic
 
 ## Run
 
-Run CPP_EXECUTABLE_NAME
+Run descartes_path_service_capability_demo
 ```
-roslaunch PACKAGE_NAME CPP_EXECUTABLE_NAME.launch
+roslaunch descartes_capability descartes_path_service_capability_demo.launch
 ```
 
 ### Run with Debuging
 
-Run CPP_EXECUTABLE_NAME with GDB
+Run descartes_path_service_capability_demo with GDB
 ```
-roslaunch PACKAGE_NAME CPP_EXECUTABLE_NAME.launch debug:=true
-```
-
-Run CPP_EXECUTABLE_NAME with Callgrind
-```
-roslaunch PACKAGE_NAME CPP_EXECUTABLE_NAME.launch callgrind:=true
+roslaunch descartes_capability descartes_path_service_capability_demo.launch debug:=true
 ```
 
-Run CPP_EXECUTABLE_NAME with Valgrind
+Run descartes_path_service_capability_demo with Callgrind
 ```
-roslaunch PACKAGE_NAME CPP_EXECUTABLE_NAME.launch callgrind:=true
+roslaunch descartes_capability descartes_path_service_capability_demo.launch callgrind:=true
+```
+
+Run descartes_path_service_capability_demo with Valgrind
+```
+roslaunch descartes_capability descartes_path_service_capability_demo.launch callgrind:=true
 ```
 
 ## Run Docker
@@ -90,28 +90,28 @@ roslaunch PACKAGE_NAME CPP_EXECUTABLE_NAME.launch callgrind:=true
 
 You must have a private rsa key `~/.ssh/id_rsa` that is not password protected and is attached to your Github and Bitbucket accounts. You must also have a working installation of `docker`.
 
-1. Navigate to `$CATKIN_WS/src/PACKAGE_NAME/.docker`. You should see the `Dockerfile` recipe in the directory.
+1. Navigate to `$CATKIN_WS/src/descartes_capability/.docker`. You should see the `Dockerfile` recipe in the directory.
 
 1. Build the docker image
 
-        cd $CATKIN_WS/src/PACKAGE_NAME/.docker
-        cp ~/.ssh/id_rsa id_rsa && docker build -t PACKAGE_NAME:kinetic-source .; rm id_rsa
+        cd $CATKIN_WS/src/descartes_capability/.docker
+        cp ~/.ssh/id_rsa id_rsa && docker build -t descartes_capability:kinetic-source .; rm id_rsa
 
 1. Run the docker image
 
     * Without the gui
 
-            docker run -it --rm PACKAGE_NAME:kinetic-source /bin/bash
+            docker run -it --rm descartes_capability:kinetic-source /bin/bash
 
     * With the gui (tested with Ubuntu native and a Ubuntu VM)
 
-            . ./gui-docker -it --rm PACKAGE_NAME:kinetic-source /bin/bash
+            . ./gui-docker -it --rm descartes_capability:kinetic-source /bin/bash
 
 ## Code API
 
 > Note: this package has not been released yet
 
-See [the Doxygen documentation](http://docs.ros.org/kinetic/api/PACKAGE_NAME/html/anotated.html)
+See [the Doxygen documentation](http://docs.ros.org/kinetic/api/descartes_capability/html/anotated.html)
 
 ## Testing and Linting
 

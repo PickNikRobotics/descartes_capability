@@ -35,19 +35,34 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************
 
- Author: FIRST_NAME LAST_NAME
- Desc: TODO(GITHUB_NAME):
+ Author: Mike Lautman
+ Desc: TODO(mlautman):
 
 """
 
 import rospy
 
-from PACKAGE_NAME.PYTHON_CLASS_FILE_NAME import PYTHON_CLASS_NAME
+from std_msgs.msg import String
 
-if __name__ == '__main__':
-    class_object = PYTHON_CLASS_NAME()
+__logger_file_name = 'descartes_path_service_capability'
 
-    try:
-        class_object.run_node()
-    except rospy.ROSInterruptException:
-        pass
+class MoveGroupDescartesPathServiceDemo(object):
+    """TODO: Fill in docstring for MoveGroupDescartesPathServiceDemo."""
+
+    def __init__(self):
+        super(MoveGroupDescartesPathServiceDemo, self).__init__()
+        self._node_name = 'MoveGroupDescartesPathServiceDemo_node'
+        self._topic_name = '/MoveGroupDescartesPathServiceDemo_topic'
+        rospy.init_node(self._node_name, anonymous=True)
+        self._msg = String('hello world')
+        self._publisher = rospy.Publisher(self._topic_name, String, queue_size=10)
+
+    def run_node(self):
+        rate = rospy.Rate(10)  # 10hz
+        msg_count = 0
+        while not rospy.is_shutdown():
+            rospy.loginfo('{}: Publishing msg #: {}'.format(__logger_file_name, msg_count))
+            self._publisher.publish(self._msg)
+            msg_count += 1
+            rate.sleep()
+
