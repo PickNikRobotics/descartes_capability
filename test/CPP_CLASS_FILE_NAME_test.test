@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <test pkg="PACKAGE_NAME" type="CPP_CLASS_FILE_NAME_test" test-name="CPP_CLASS_FILE_NAME_test" time-limit="300" args="">
+    <rosparam command="load" file="$(find PACKAGE_NAME)/config/example.yaml"/>
+  </test>
+</launch>

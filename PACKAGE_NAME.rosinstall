@@ -1,0 +1,5 @@
+# Used with wstool, users can download and source of all packages in this.
+- git:
+    local-name: PACKAGE_NAME
+    uri: git@github.com:PickNikRobotics/PACKAGE_NAME.git
+    version: master

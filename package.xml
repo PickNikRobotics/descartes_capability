@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>PACKAGE_NAME</name>
+  <version>0.0.1</version>
+  <description>PACKAGE_DESCRIPTION</description>
+
+  <maintainer email="EMAIL_ADDRESS">FIRST_NAME LAST_NAME</maintainer>
+  <author email="EMAIL_ADDRESS">FIRST_NAME LAST_NAME</author>
+
+  <license>BSD</license>
+
+  <url type="website">https://github.com/PickNikRobotics/PACKAGE_NAME</url>
+  <url type="bugtracker">https://github.com/PickNikRobotics/PACKAGE_NAME/issues</url>
+  <url type="repository">https://github.com/PickNikRobotics/PACKAGE_NAME/</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>roslint</depend>
+  <depend>rosparam_shortcuts</depend>
+  <depend>eigen</depend>
+  <depend>rviz_visual_tools</depend>
+  <depend version_eq="3.9">clang-format</depend>
+
+  <test_depend>rostest</test_depend>
+  <test_depend>rosunit</test_depend>
+
+  <export>
+  </export>
+</package>
