@@ -15,13 +15,13 @@ TODO(mlautman): fix Travis badge:
 
 > Note: this package has not been released yet
 
-    sudo apt-get install ros-kinetic-descartes_capability
+    sudo apt-get install ros-melodic-descartes_capability
 
 ### Build from Source
 
 These instructions assume you are running on Ubuntu 16.04:
 
-1. [Install ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) and the following build tools.
+1. [Install ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu) and the following build tools.
 
         sudo apt-get install python-wstool python-catkin-tools
 
@@ -37,11 +37,11 @@ These instructions assume you are running on Ubuntu 16.04:
         wstool init src
         wstool merge -t src descartes_capability/descartes_capability.rosinstall
         wstool update -t src
-        rosdep install --from-paths src --ignore-src --rosdistro kinetic
+        rosdep install --from-paths src --ignore-src --rosdistro melodic
 
 1. Configure and build the workspace:
 
-        catkin config --extend /opt/ros/kinetic --cmake-args -DCMAKE_BUILD_TYPE=Release
+        catkin config --extend /opt/ros/melodic --cmake-args -DCMAKE_BUILD_TYPE=Release
         catkin build
 
 1. Source the workspace.
@@ -58,7 +58,11 @@ To make sure you have the latest repos:
     cd ..
     wstool merge descartes_capability/descartes_capability.rosinstall
     wstool update
-    rosdep install --from-paths . --ignore-src --rosdistro kinetic
+    rosdep install --from-paths . --ignore-src --rosdistro melodic
+
+## Setup
+
+To use the Descartes path service capability in place of the move
 
 ## Run
 
@@ -95,23 +99,23 @@ You must have a private rsa key `~/.ssh/id_rsa` that is not password protected a
 1. Build the docker image
 
         cd $CATKIN_WS/src/descartes_capability/.docker
-        cp ~/.ssh/id_rsa id_rsa && docker build -t descartes_capability:kinetic-source .; rm id_rsa
+        cp ~/.ssh/id_rsa id_rsa && docker build -t descartes_capability:melodic-source .; rm id_rsa
 
 1. Run the docker image
 
     * Without the gui
 
-            docker run -it --rm descartes_capability:kinetic-source /bin/bash
+            docker run -it --rm descartes_capability:melodic-source /bin/bash
 
     * With the gui (tested with Ubuntu native and a Ubuntu VM)
 
-            . ./gui-docker -it --rm descartes_capability:kinetic-source /bin/bash
+            . ./gui-docker -it --rm descartes_capability:melodic-source /bin/bash
 
 ## Code API
 
 > Note: this package has not been released yet
 
-See [the Doxygen documentation](http://docs.ros.org/kinetic/api/descartes_capability/html/anotated.html)
+See [the Doxygen documentation](http://docs.ros.org/melodic/api/descartes_capability/html/anotated.html)
 
 ## Testing and Linting
 
@@ -121,7 +125,7 @@ To run [roslint](http://wiki.ros.org/roslint), use the following command with [c
 
 To run [catkin lint](https://pypi.python.org/pypi/catkin_lint), use the following command with [catkin-tools](https://catkin-tools.readthedocs.org/).
 
-    catkin lint -W2 --rosdistro kinetic
+    catkin lint -W2 --rosdistro melodic
 
 Use the following command with [catkin-tools](https://catkin-tools.readthedocs.org/) to run tests.
 

@@ -55,26 +55,25 @@
 
 namespace descartes_capability
 {
-
 class MoveGroupDescartesPathServiceTest : public ::testing::Test
 {
 public:
   MoveGroupDescartesPathServiceTest() : nh_("~")
-  {}
+  {
+  }
 
 protected:
   ros::NodeHandle nh_;
 };  // class MoveGroupDescartesPathServiceTest
 
-TEST_F(MoveGroupDescartesPathServiceTest, ConstructDestruct) { ASSERT_TRUE(base.initialize()); }
-
 TEST_F(MoveGroupDescartesPathServiceTest, NameOfTest)
 {
+  // TODO(mlautman): Add tests
   bool test = true;
   EXPECT_TRUE(test);
 }
 
-} // namespace descartes_capability
+}  // namespace descartes_capability
 
 int main(int argc, char** argv)
 {

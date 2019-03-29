@@ -1,0 +1,16 @@
+move_group:
+
+  disable_capabilities: move_group/MoveGroupCartesianPathService
+  capabilities: descartes_capability/MoveGroupDescartesPathService
+
+  descartes_params:
+    positional_tolerance: 0.0
+    positional_tolerance_inc: 0.0
+    roll_orientation_tolerance: 0.1
+    pitch_orientation_tolerance: 0.1
+    yaw_orientation_tolerance: 0.0
+    orientation_tolerance_inc: 0.1
+
+    debug:
+      visual: false
+      verbose: false

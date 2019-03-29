@@ -1,0 +1,11 @@
+<library path="libdescartes_capability">
+
+
+  <!-- To use the new Descartes path service, comment out the MoveGroupCartesianPathService capability in move_group -->
+  <class name="descartes_capability/MoveGroupDescartesPathService" type="descartes_capability::MoveGroupDescartesPathService" base_class_type="move_group::MoveGroupCapability">
+    <description>
+      Computing straight line Cartesian paths using Descartes under the hood via a ROS service
+    </description>
+  </class>
+
+</library>

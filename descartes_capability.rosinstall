@@ -1,5 +1,10 @@
-# Used with wstool, users can download and source of all packages in this.
+# Used with wstool.
 - git:
     local-name: descartes_capability
-    uri: git@github.com:PickNikRobotics/descartes_capability.git
+    uri: https://github.com/PickNikRobotics/descartes_capability.git
     version: master
+
+- git:
+    local-name: descartes
+    uri: https://github.com/PickNikRobotics/descartes.git
+    version: melodic-collision-minimum

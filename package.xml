@@ -15,16 +15,22 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>descartes_core</depend>
+  <depend>descartes_moveit</depend>
+  <depend>descartes_trajectory</depend>
+  <depend>descartes_planner</depend>
+  <depend>moveit_core</depend>
+  <depend>moveit_visual_tools</depend>
+  <depend>moveit_ros_move_group</depend>
   <depend>roscpp</depend>
   <depend>roslint</depend>
-  <depend>rosparam_shortcuts</depend>
-  <depend>eigen</depend>
-  <depend>rviz_visual_tools</depend>
+  <depend>rospy</depend>
   <depend version_eq="3.9">clang-format</depend>
 
   <test_depend>rostest</test_depend>
   <test_depend>rosunit</test_depend>
 
   <export>
+    <moveit_ros_move_group plugin="${prefix}/descartes_capability_plugin_description.xml"/>
   </export>
 </package>

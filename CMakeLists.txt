@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 2.8.12)
 project(descartes_capability)
 
-# C++ 11
-add_compile_options(-std=c++11)
+# C++ 14
+add_compile_options(-std=c++14)
 
 # Warnings
 add_definitions(-W -Wall -Wextra
@@ -12,11 +12,15 @@ add_definitions(-W -Wall -Wextra
 
 # Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS
+  descartes_core
+  descartes_moveit
+  descartes_trajectory
+  descartes_planner
+  moveit_core
+  moveit_visual_tools
+  moveit_ros_move_group
   roscpp
   roslint
-  rosparam_shortcuts
-  rviz_visual_tools
-  std_msgs
   rospy
 )
 
@@ -30,8 +34,10 @@ find_package(Eigen3 REQUIRED)
 catkin_package(
   CATKIN_DEPENDS
     roscpp
-    std_msgs
     rospy
+    moveit_core
+    moveit_ros_move_group
+    moveit_visual_tools
   INCLUDE_DIRS
     include
   LIBRARIES
@@ -40,7 +46,6 @@ catkin_package(
     Boost
     EIGEN3
 )
-catkin_python_setup()
 
 ###########
 ## Build ##
@@ -65,29 +70,13 @@ add_library(
   src/descartes_path_service_capability.cpp
 )
 
-# Specify libraries to link a library or executable target against
-target_link_libraries(
+add_dependencies(
   ${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-)
-
-# Declare a C++ executable
-add_executable(
-  ${PROJECT_NAME}_descartes_path_service_capability_demo
-  src/descartes_path_service_capability_demo.cpp
-)
-
-# Rename C++ executable without namespace
-set_target_properties(
-  ${PROJECT_NAME}_descartes_path_service_capability_demo
-  PROPERTIES
-    OUTPUT_NAME descartes_path_service_capability_demo PREFIX ""
+  ${catkin_EXPORTED_TARGETS}
 )
 
 # Specify libraries to link a library or executable target against
 target_link_libraries(
-  ${PROJECT_NAME}_descartes_path_service_capability_demo
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
@@ -100,7 +89,7 @@ target_link_libraries(
 # Mark executables and/or libraries for installation
 install(
   TARGETS
-    ${PROJECT_NAME} ${PROJECT_NAME}_descartes_path_service_capability_demo
+    ${PROJECT_NAME}
   ARCHIVE DESTINATION
     ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION
@@ -117,17 +106,6 @@ install(
     ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS scripts/descartes_path_service_capability_python_demo.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-# Mark roslaunch files for installation
-install(
-  DIRECTORY
-    launch
-  DESTINATION
-    ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
 # Mark config files for installation
 install(
   DIRECTORY
@@ -135,6 +113,10 @@ install(
   DESTINATION
     ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
+
+install(FILES
+  descartes_capability_plugin_description.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 #############
 ## Testing ##

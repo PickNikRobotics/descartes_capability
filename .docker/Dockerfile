@@ -1,8 +1,8 @@
-# descartes_capability:kinetic-source
+# descartes_capability:melodic-source
 # Downloads the source code, installs the remaining debian dependencies, and
 # builds the package
 
-FROM ros:kinetic
+FROM ros:melodic
 
 # Remove warning 'Could not determine the width of the terminal.'
 ENV TERM xterm
@@ -12,7 +12,7 @@ RUN mkdir -p $CATKIN_WS/src
 WORKDIR $CATKIN_WS/src
 
 # Install SHH
-# Note: --fix-missing is run to fix an issue with an outdated ros-kinetic-rviz-visual-tools
+# Note: --fix-missing is run to fix an issue with an outdated ros-melodic-rviz-visual-tools
 RUN apt-get -qq update --fix-missing && \
     apt-get -qq install -y wget ssh python-catkin-tools python-wstool
 
@@ -32,7 +32,7 @@ RUN git clone git@github.com:PickNikRobotics/descartes_capability.git && \
     wstool update && \
     rm /root/.ssh/id_rsa
 
-# Note that because we're building on top of kinetic-ci, there should not be
+# Note that because we're building on top of melodic-ci, there should not be
 # any deps installed unless something has changed in the source code since the
 # other container was made (they are triggered together so should only be
 # one-build out of sync)
@@ -49,5 +49,5 @@ ENV PYTHONIOENCODING UTF-8
 # form of timeout)
 RUN catkin config --extend /opt/ros/${ROS_DISTRO} --cmake-args -DCMAKE_BUILD_TYPE=Release && \
     catkin build --jobs 1 --limit-status-rate 0.001 --no-notify && \
-    echo '. /opt/ros/kinetic/setup.bash' >> ~/.bashrc && \
+    echo '. /opt/ros/melodic/setup.bash' >> ~/.bashrc && \
     echo '. $CATKIN_WS/devel/setup.bash' >> ~/.bashrc

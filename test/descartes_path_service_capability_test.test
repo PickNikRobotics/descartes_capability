@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
-  <test pkg="descartes_capability" type="descartes_path_service_capability_test" test-name="descartes_path_service_capability_test" time-limit="300" args="">
-    <rosparam command="load" file="$(find descartes_capability)/config/example.yaml"/>
+  <test pkg="descartes_capability"
+        type="descartes_path_service_capability_test"
+        test-name="descartes_path_service_capability_test"
+        time-limit="300"
+        args="">
+    <rosparam command="load" file="$(find descartes_capability)/config/setup.yaml"/>
   </test>
 </launch>
