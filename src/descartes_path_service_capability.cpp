@@ -44,6 +44,7 @@
 #include <moveit/kinematic_constraints/utils.h>
 #include <moveit/move_group/capability_names.h>
 #include <moveit/planning_pipeline/planning_pipeline.h>
+#include <moveit/planning_scene_monitor/planning_scene_monitor.h>
 #include <moveit/robot_state/conversions.h>
 #include <moveit/trajectory_processing/iterative_time_parameterization.h>
 #include <moveit_msgs/DisplayTrajectory.h>
@@ -58,7 +59,6 @@ MoveGroupDescartesPathService::MoveGroupDescartesPathService()
   , current_world_frame_("")
   , current_tcp_frame_("")
 {
-  visual_tools_.reset(new moveit_visual_tools::MoveItVisualTools("world", "/rviz_visual_tools"));
 }
 
 void MoveGroupDescartesPathService::initialize()
@@ -81,6 +81,8 @@ void MoveGroupDescartesPathService::initialize()
   context_->planning_scene_monitor_->updateFrameTransforms();
 
   // For visualizing the path request
+  const std::string& world_frame = context_->planning_scene_monitor_->getRobotModel()->getModelFrame();
+  visual_tools_.reset(new moveit_visual_tools::MoveItVisualTools(world_frame, "/rviz_visual_tools"));
   if (visual_debug_)
   {
     visual_tools_->loadMarkerPub(true);

@@ -97,7 +97,6 @@ If you set up your environment correctly, you should see these lines output to y
 
 You can now use your shiny new `DescartesPathService` just like you used to use the `CartesianPathService`.
 
-
 ## Run Docker
 
 ### Prerequisite
