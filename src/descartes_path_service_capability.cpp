@@ -67,14 +67,6 @@ void MoveGroupDescartesPathService::initialize()
   const std::string node_name = "MoveGroupDescartesPathService";
   ros::NodeHandle rosparam_nh(nh_, node_name);
 
-  // Params loaded from server
-  nh_.param<double>("descartes_params/positional_tolerance", positional_tolerance_, 0.0);
-  nh_.param<double>("descartes_params/positional_tolerance_inc", positional_tolerance_increment_, 0.0);
-  nh_.param<double>("descartes_params/roll_orientation_tolerance", roll_orientation_tolerance_, 0.0);
-  nh_.param<double>("descartes_params/pitch_orientation_tolerance", pitch_orientation_tolerance_, 0.0);
-  nh_.param<double>("descartes_params/yaw_orientation_tolerance", yaw_orientation_tolerance_, 0.0);
-  nh_.param<double>("descartes_params/orientation_tolerance_inc", orientation_tolerance_increment_, 0.0);
-
   nh_.param<bool>("descartes_params/debug/verbose", verbose_debug_, false);
   nh_.param<bool>("descartes_params/debug/visual", visual_debug_, false);
 
@@ -291,6 +283,15 @@ bool MoveGroupDescartesPathService::computeService(moveit_msgs::GetCartesianPath
                                                    moveit_msgs::GetCartesianPath::Response& res)
 {
   ROS_INFO_NAMED(name_, "Received request to compute Descartes path");
+
+  // Since Descartes takes in more parameters than are available in the moveit_msgs::GetCartesianPath::Request,
+  // we provide rosparam interfaces that will read in additional prameters from the parameter server.
+  nh_.param<double>("descartes_params/positional_tolerance", positional_tolerance_, 0.0);
+  nh_.param<double>("descartes_params/positional_tolerance_inc", positional_tolerance_increment_, 0.0);
+  nh_.param<double>("descartes_params/roll_orientation_tolerance", roll_orientation_tolerance_, 0.0);
+  nh_.param<double>("descartes_params/pitch_orientation_tolerance", pitch_orientation_tolerance_, 0.0);
+  nh_.param<double>("descartes_params/yaw_orientation_tolerance", yaw_orientation_tolerance_, 0.0);
+  nh_.param<double>("descartes_params/orientation_tolerance_inc", orientation_tolerance_increment_, 0.0);
 
   // Get most up to date planning scene information
   context_->planning_scene_monitor_->updateFrameTransforms();
