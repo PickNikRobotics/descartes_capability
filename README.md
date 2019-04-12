@@ -1,8 +1,8 @@
 # descartes_capability
 
-Description: A move_group capability that uses Descartes for Cartesian Planning
-
 <img src="https://picknik.ai/images/logo.jpg" width="100">
+
+[PickNik Robotics](http://picknik.ai/) and [Carbon Robotics](https://carbon.ai/) are exited to be releasing a standalone ``move_group`` capability for planning semi-constrained Cartesian Paths with [Descartes](https://github.com/ros-industrial-consortium/descartes). This capability is a drop-in replacement for ``move_group``'s [MoveGroupCartesianPathService](https://github.com/ros-planning/moveit/blob/master/moveit_ros/move_group/src/default_capabilities/cartesian_path_service_capability.h).
 
 Developed by Mike Lautman at [PickNik Consulting](http://picknik.ai/)
 
@@ -13,13 +13,13 @@ TODO(mlautman): fix Travis badge:
 
 ### Ubuntu Debian
 
-> Note: this package has not been released yet
+**NOTE:** this package has not been released yet
 
     sudo apt-get install ros-melodic-descartes_capability
 
 ### Build from Source
 
-These instructions assume you are running on Ubuntu 16.04:
+These instructions assume you are running ROS Melodic on Ubuntu 18.04:
 
 1. [Install ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu) and the following build tools.
 
@@ -62,7 +62,7 @@ To make sure you have the latest repos:
 
 ## Run
 
-To use the Descartes path service capability in place of the move_group Cartesian path planning service, you must set the `~/move_group/disable_capabilities` param to `move_group/MoveGroupCartesianPathService` and `~/move_group/disable_capabilities` to `descartes_capability/MoveGroupDescartesPathService`. This is done for you in `./config/setup.yaml`. You can either set these parameters explicitly in your robot's `move_group.launch` file or you can simply load `./config/setup.yaml` to the param server.
+To use the Descartes path service capability in place of the ``move_group`` Cartesian path planning service, you must add ``move_group/MoveGroupCartesianPathService`` to the ``move_group/disable_capabilities`` parameter and add ``descartes_capability/MoveGroupDescartesPathService`` to the ``move_group/disable_capabilities`` parameter. One way to do this would be to load ``./config/setup.yaml`` to the parameter server. You can also set these parameters explicitly in your robot's ``move_group.launch`` file.
 
 ```yaml
 move_group:
@@ -97,7 +97,11 @@ If you set up your environment correctly, you should see these lines output to y
 
 You can now use your shiny new `DescartesPathService` just like you used to use the `CartesianPathService`.
 
-## Run Docker
+Visualize an example plan by running:
+
+    rosrun descartes_capability example_cartesian_command.py
+
+## Run in Docker
 
 ### Prerequisite
 

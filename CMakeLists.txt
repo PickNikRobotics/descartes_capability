@@ -116,6 +116,12 @@ install(
     ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
+# Mark python demo script for installation
+install(PROGRAMS
+  scripts/example_cartesian_command.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 install(FILES
   descartes_capability_plugin_description.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
