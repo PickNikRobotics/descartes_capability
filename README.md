@@ -62,7 +62,7 @@ To make sure you have the latest repos:
 
 ## Run
 
-To use the Descartes path service capability in place of the ``move_group`` Cartesian path planning service, you must add ``move_group/MoveGroupCartesianPathService`` to the ``move_group/disable_capabilities`` parameter and add ``descartes_capability/MoveGroupDescartesPathService`` to the ``move_group/disable_capabilities`` parameter. One way to do this would be to load ``./config/setup.yaml`` to the parameter server. You can also set these parameters explicitly in your robot's ``move_group.launch`` file.
+To use the Descartes path service capability in place of the ``move_group`` Cartesian path planning service, you must add ``move_group/MoveGroupCartesianPathService`` and ``descartes_capability/MoveGroupDescartesPathService`` to the ``move_group/disable_capabilities`` parameter. One way to do this would be to load ``./config/setup.yaml`` to the parameter server. You can also set these parameters explicitly in your robot's ``move_group.launch`` file.
 
 ```yaml
 move_group:
