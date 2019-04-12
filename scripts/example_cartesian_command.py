@@ -101,13 +101,13 @@ class DescartesExample(object):
     # ignoring the check for infeasible jumps in joint space, which is sufficient
     # for this tutorial.
     (plan, fraction) = self.move_group.compute_cartesian_path(waypoints,   # waypoints to follow
-                                                              0.03,        # eef_step
-                                                              2)         # jump_threshold
+                                                              0.01,        # eef_step
+                                                              0)         # jump_threshold
     return plan, fraction
 
 def main(scale, wait_for_shutdown):
   example = DescartesExample()
-  plan, faction = example.plan_cartesian_path(scale)
+  plan, fraction = example.plan_cartesian_path(scale)
   if wait_for_shutdown:
     raw_input("press enter for shutdown")
 
