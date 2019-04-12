@@ -2,7 +2,7 @@
 
 <img src="https://picknik.ai/images/logo.jpg" width="100">
 
-[PickNik Robotics](http://picknik.ai/) and [Carbon Robotics](https://carbon.ai/) are exited to be releasing a standalone ``move_group`` capability for planning semi-constrained Cartesian Paths with [Descartes](https://github.com/ros-industrial-consortium/descartes). This capability is a drop-in replacement for ``move_group``'s [MoveGroupCartesianPathService](https://github.com/ros-planning/moveit/blob/master/moveit_ros/move_group/src/default_capabilities/cartesian_path_service_capability.h).
+[PickNik Robotics](http://picknik.ai/) and [Carbon Robotics](https://carbon.ai/) are excited to be releasing a standalone ``move_group`` capability for planning semi-constrained Cartesian Paths with [Descartes](https://github.com/ros-industrial-consortium/descartes). This capability is a drop-in replacement for ``move_group``'s [MoveGroupCartesianPathService](https://github.com/ros-planning/moveit/blob/master/moveit_ros/move_group/src/default_capabilities/cartesian_path_service_capability.h).
 
 Developed by Mike Lautman at [PickNik Consulting](http://picknik.ai/)
 
