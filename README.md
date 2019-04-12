@@ -6,7 +6,6 @@
 
 Developed by Mike Lautman at [PickNik Consulting](http://picknik.ai/)
 
-TODO(mlautman): fix Travis badge:
 [![Build Status](https://travis-ci.com/PickNikRobotics/descartes_capability.svg?token=o9hPQnr2kShM9ckDs6J8&branch=master)](https://travis-ci.com/PickNikRobotics/descartes_capability)
 
 ## Install
