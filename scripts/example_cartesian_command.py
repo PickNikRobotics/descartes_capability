@@ -46,7 +46,7 @@ from moveit_commander.conversions import pose_to_list
 
 class DescartesExample(object):
   """A moveit_commander demonstration of the Descartes move_group capabiity."""
-  def __init__(self, group_name="panda_arm", arg=None):
+  def __init__(self, group_name, arg=None):
     super(DescartesExample, self).__init__()
     self.arg = arg
     self.group_name = group_name
@@ -105,8 +105,8 @@ class DescartesExample(object):
                                                               0)         # jump_threshold
     return plan, fraction
 
-def main(scale, wait_for_shutdown):
-  example = DescartesExample()
+def main(group_name, scale, wait_for_shutdown):
+  example = DescartesExample(group_name)
   plan, fraction = example.plan_cartesian_path(scale)
   if wait_for_shutdown:
     raw_input("press enter for shutdown")
@@ -115,9 +115,16 @@ def main(scale, wait_for_shutdown):
 if __name__ == '__main__':
   scale = 1.0
   wait_for_shutdown = True
-  if len(sys.argv) > 1:
-    scale = float(sys.argv[1])
-  if len(sys.argv) > 2:
-    wait_for_shutdown = bool(sys.argv[2])
+  group_name="panda_arm"
+  ix = 1
+  if len(sys.argv) > ix:
+    group_name = sys.argv[ix]
+    ix += 1
+  if len(sys.argv) > ix:
+    scale = float(sys.argv[ix])
+    ix += 1
+  if len(sys.argv) > ix:
+    wait_for_shutdown = bool(sys.argv[ix])
+    ix += 1
 
-  main(scale, wait_for_shutdown)
+  main(group_name, scale, wait_for_shutdown)
