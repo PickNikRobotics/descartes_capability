@@ -14,12 +14,12 @@ add_definitions(-W -Wall -Wextra
 find_package(catkin REQUIRED COMPONENTS
   descartes_core
   descartes_moveit
-  descartes_trajectory
   descartes_planner
+  descartes_trajectory
   moveit_core
+  moveit_ros_move_group
   moveit_ros_planning
   moveit_visual_tools
-  moveit_ros_move_group
   roscpp
   roslint
   rospy
@@ -34,12 +34,12 @@ find_package(Eigen3 REQUIRED)
 ###################################
 catkin_package(
   CATKIN_DEPENDS
+    moveit_core
+    moveit_ros_move_group
+    moveit_ros_planning
+    moveit_visual_tools
     roscpp
     rospy
-    moveit_core
-    moveit_ros_planning
-    moveit_ros_move_group
-    moveit_visual_tools
   INCLUDE_DIRS
     include
   LIBRARIES
@@ -123,7 +123,7 @@ install(PROGRAMS
 )
 
 install(FILES
-  descartes_capability_plugin_description.xml
+  ${PROJECT_NAME}_plugin_description.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 #############
