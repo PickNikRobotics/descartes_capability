@@ -54,10 +54,15 @@ namespace descartes_capability
 MoveGroupDescartesPathService::MoveGroupDescartesPathService()
   : MoveGroupCapability("DescartesPathService")
   , nh_("~")
+  , positional_tolerance_(0.0)
+  , positional_tolerance_increment_(0.0)
+  , roll_orientation_tolerance_(0.0)
+  , pitch_orientation_tolerance_(0.0)
+  , yaw_orientation_tolerance_(0.0)
+  , orientation_tolerance_increment_(0.0)
+  , verbose_debug_(false)
+  , visual_debug_(false)
   , display_computed_paths_(true)
-  , current_group_name_("")
-  , current_world_frame_("")
-  , current_tcp_frame_("")
 {
 }
 
@@ -122,9 +127,8 @@ void MoveGroupDescartesPathService::createDescartesTrajectory(
     const EigenSTL::vector_Isometry3d& dense_waypoints,
     std::vector<descartes_core::TrajectoryPtPtr>& input_descartes_trajectory)
 {
-  for (std::size_t i = 0; i < dense_waypoints.size(); ++i)
+  for (auto eigen_pose : dense_waypoints)
   {
-    const Eigen::Isometry3d eigen_pose = dense_waypoints[i];
     const Eigen::Quaterniond rotation(eigen_pose.rotation());
 
     if (verbose_debug_)
@@ -258,10 +262,9 @@ bool MoveGroupDescartesPathService::initializeDescartesModel(const std::string& 
 {
   // Setup Descartes model
   descartes_model_.reset(new descartes_moveit::MoveitStateAdapter);
-  descartes_moveit::MoveitStateAdapter* moveit_state_adapter =
-      dynamic_cast<descartes_moveit::MoveitStateAdapter*>(descartes_model_.get());
-  bool model_init =
-      moveit_state_adapter->initialize(context_->planning_scene_monitor_, group_name, world_frame, tcp_frame);
+  auto* moveit_state_adapter = dynamic_cast<descartes_moveit::MoveitStateAdapter*>(descartes_model_.get());
+  bool model_init = moveit_state_adapter->initialize(context_->planning_scene_monitor_->getRobotModel(), group_name,
+                                                     world_frame, tcp_frame);
 
   if (!model_init)
   {
@@ -332,7 +335,7 @@ bool MoveGroupDescartesPathService::computeService(moveit_msgs::GetCartesianPath
   Eigen::Isometry3d current_pose;
   descartes_model_->getFK(current_joints, current_pose);
 
-  if (req.waypoints.size() < 1)
+  if (req.waypoints.empty())
   {
     ROS_ERROR_NAMED(name_, "Must provide at least 1 input trajectory point %zu provided", req.waypoints.size());
     res.error_code.val = moveit_msgs::MoveItErrorCodes::FAILURE;
@@ -428,7 +431,7 @@ bool MoveGroupDescartesPathService::computeService(moveit_msgs::GetCartesianPath
   if (!descartes_planner.planPath(descartes_trajectory))
   {
     valid_path = false;
-    ROS_ERROR_STREAM_NAMED(name_, "Could not solve for a valid path.");
+    ROS_INFO_STREAM_NAMED(name_, "Could not solve for a valid path.");
   }
   else
   {
@@ -439,7 +442,7 @@ bool MoveGroupDescartesPathService::computeService(moveit_msgs::GetCartesianPath
   if (!descartes_planner.getPath(descartes_result))
   {
     valid_path = false;
-    ROS_ERROR_STREAM_NAMED(name_, "Could not retrieve path.");
+    ROS_INFO_STREAM_NAMED(name_, "Could not retrieve path.");
   }
 
   if (valid_path && verbose_debug_)
@@ -447,7 +450,7 @@ bool MoveGroupDescartesPathService::computeService(moveit_msgs::GetCartesianPath
 
   if (!valid_path)
   {
-    ROS_ERROR_STREAM_NAMED(name_, "Unable to generate a plan using Descartes.");
+    ROS_INFO_STREAM_NAMED(name_, "Unable to generate a plan using Descartes.");
     res.error_code.val = moveit_msgs::MoveItErrorCodes::FAILURE;
     res.fraction = 0.0;
     return true;
@@ -499,9 +502,9 @@ void MoveGroupDescartesPathService::printJoints(const std::vector<double>& joint
 {
   std::stringstream o;
 
-  for (std::size_t i = 0; i < joints.size(); ++i)
+  for (double joint : joints)
   {
-    o << "\t" << std::fixed << std::setw(6) << std::setprecision(3) << joints[i];
+    o << "\t" << std::fixed << std::setw(6) << std::setprecision(3) << joint;
   }
   ROS_DEBUG_STREAM_NAMED(name_, o.str());
 }
@@ -510,9 +513,9 @@ void MoveGroupDescartesPathService::printJointsNamed(const std::string& name, co
 {
   std::stringstream o;
   o << name;
-  for (std::size_t i = 0; i < joints1.size(); ++i)
+  for (double i : joints1)
   {
-    o << "\t" << std::fixed << std::setw(6) << std::setprecision(3) << joints1[i];
+    o << "\t" << std::fixed << std::setw(6) << std::setprecision(3) << i;
   }
   ROS_DEBUG_STREAM_NAMED(name_, o.str());
 }
