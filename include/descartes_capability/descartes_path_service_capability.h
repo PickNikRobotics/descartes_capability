@@ -80,8 +80,8 @@ private:
   double computeMaxJointDelta(const std::vector<double>& joints1, const std::vector<double>& joints2);
 
   /** \brief Interpolates between start and end poses and appends them to deense_waypoints **/
-  void createDensePath(const Eigen::Isometry3d& start, const Eigen::Isometry3d& end, double max_step,
-                       EigenSTL::vector_Isometry3d& dense_waypoints);
+  static void createDensePath(const Eigen::Isometry3d& start, const Eigen::Isometry3d& end, double max_step,
+                              EigenSTL::vector_Isometry3d& dense_waypoints);
 
   /** \brief Transforms each point in a vector of affine**/
   void createDescartesTrajectory(const EigenSTL::vector_Isometry3d& dense_waypoints,
@@ -128,6 +128,6 @@ private:
   // For Rviz visualizations
   moveit_visual_tools::MoveItVisualToolsPtr visual_tools_;
 };
-}
+}  // namespace descartes_capability
 
 #endif  // MOVEIT_MOVE_GROUP_DESCARTES_PATH_SERVICE_CAPABILITY_
