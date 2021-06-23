@@ -20,6 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning
   moveit_visual_tools
   moveit_ros_move_group
+  eigen_conversions
   roscpp
   roslint
   rospy
@@ -40,6 +41,7 @@ catkin_package(
     moveit_ros_planning
     moveit_ros_move_group
     moveit_visual_tools
+    eigen_conversions
   INCLUDE_DIRS
     include
   LIBRARIES

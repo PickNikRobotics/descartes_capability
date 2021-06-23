@@ -26,6 +26,7 @@
   <depend>roscpp</depend>
   <depend>roslint</depend>
   <depend>rospy</depend>
+  <depend>eigen_conversions</depend>
   <depend version_eq="3.9">clang-format</depend>
 
   <test_depend version_gte="1.11.2">pluginlib</test_depend>
