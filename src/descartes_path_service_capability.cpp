@@ -261,7 +261,7 @@ bool MoveGroupDescartesPathService::initializeDescartesModel(const std::string& 
   descartes_moveit::MoveitStateAdapter* moveit_state_adapter =
       dynamic_cast<descartes_moveit::MoveitStateAdapter*>(descartes_model_.get());
   bool model_init =
-      moveit_state_adapter->initialize(context_->planning_scene_monitor_, group_name, world_frame, tcp_frame);
+      moveit_state_adapter->initialize(context_->planning_scene_monitor_->getRobotModel(), group_name, world_frame, tcp_frame);
 
   if (!model_init)
   {
